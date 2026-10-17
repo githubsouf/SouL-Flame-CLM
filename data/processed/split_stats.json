@@ -1,0 +1,10 @@
+{
+  "source": "data/raw/the-verdict.txt",
+  "sha256": "b41e41a68f0398a3154ae69e2e4c0e2694e17fe0d66730536837f1b01935b31f",
+  "chars_total": 20479,
+  "split_rule": "first 90% of characters -> train, rest -> val, cut moved forward to the next whitespace",
+  "train_chars": 18434,
+  "val_chars": 2045,
+  "unique_chars": 62,
+  "words_whitespace": 3634
+}
