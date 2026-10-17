@@ -1,22 +1,4 @@
-"""
-SouL Flame — autoregressive generation
-======================================
-STATUS: skeleton. Tests: tests/test_model.py (generation tests)
 
-ALGORITHM (greedy first; temperature / top-k / top-p come in Week 9)
-    repeat max_new_tokens times:
-        1. crop idx to the last context_size tokens
-        2. logits = model(idx_cond)                 (B, T, V)
-        3. keep only the last position              (B, V)
-        4. next = argmax over V (keepdim)           (B, 1)
-        5. idx = concat(idx, next) along dim 1      (B, T+1)
-    return idx
-
-HINTS
-    - Wrap the model call in torch.no_grad().
-    - Put the model in eval() before calling (dropout off) -> deterministic.
-    - softmax is not needed for argmax (monotonic) — why?
-"""
 import torch
 
 

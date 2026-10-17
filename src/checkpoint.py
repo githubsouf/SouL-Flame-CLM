@@ -19,7 +19,16 @@ def save_checkpoint(path: str, model, optimizer, cfg: dict, step: int, epoch: in
     #             "cfg": cfg, "step": step, "epoch": epoch}, path)
     # save the OPTIMIZER too !! adam keeps momentum. without it, resuming = a small restart
     # and save the cfg, otherwise in 2 weeks u wont know which config those weights belong to
-    pass
+    torch.save(
+        {
+            "model_state_dict": model.state_dict(),
+            "optimizer_state_dict": optimizer.state_dict(),
+            "cfg": cfg,
+            "step": step,
+            "epoch": epoch,
+        },
+        path,
+    )
 
 
 def load_checkpoint(path: str, model, optimizer=None, device="cpu") -> dict:
@@ -30,4 +39,12 @@ def load_checkpoint(path: str, model, optimizer=None, device="cpu") -> dict:
     # 3. if optimizer is not None -> load its state too
     # 4. return the rest (cfg, step, epoch)
     # the model must be BUILT with the same cfg before loading, load_state_dict doesnt create layers
-    pass
+    ckpt = torch.load(path, map_location=device)
+    model.load_state_dict(ckpt["model_state_dict"])
+    if optimizer is not None:
+        optimizer.load_state_dict(ckpt["optimizer_state_dict"])
+    return {
+        "cfg": ckpt["cfg"],
+        "step": ckpt["step"],
+        "epoch": ckpt["epoch"],
+    }

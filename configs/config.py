@@ -25,5 +25,22 @@ QUESTION
     emb_dim must be divisible by n_heads — why?
 """
 
-SOULFLAME_124M: dict = {}   # TODO Soufiane
-SOULFLAME_TINY: dict = {}   # TODO Soufiane
+SOULFLAME_124M: dict = {
+    "vocab_size": 50257,
+    "context_length": 1024,
+    "emb_dim": 768,
+    "n_heads": 12,
+    "n_layers": 12,
+    "drop_rate": 0.1,
+    "qkv_bias": False,
+}
+
+SOULFLAME_TINY: dict = {
+    "vocab_size": 50,
+    "context_length": 16,
+    "emb_dim": 32,
+    "n_heads": 4,
+    "n_layers": 2,
+    "drop_rate": 0.0,
+    "qkv_bias": False,
+}
