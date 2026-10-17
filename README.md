@@ -16,11 +16,11 @@ Repository: [https://github.com/githubsouf/SouL-Flame-CLM](https://github.com/gi
 Mathematically:
 
 $$
-x_1 = x + \operatorname{Dropout}(\operatorname{Attention}(\operatorname{LayerNorm}_1(x)))
+x_1 = x + \mathrm{Dropout}(\mathrm{Attention}(\mathrm{LayerNorm}_1(x)))
 $$
 
 $$
-x_2 = x_1 + \operatorname{Dropout}(\operatorname{FFN}(\operatorname{LayerNorm}_2(x_1)))
+x_2 = x_1 + \mathrm{Dropout}(\mathrm{FFN}(\mathrm{LayerNorm}_2(x_1)))
 $$
 
 The block preserves the model shape:
@@ -78,7 +78,7 @@ $$
 Future positions are masked with $-\infty$, then:
 
 $$
-A = \operatorname{softmax}(S)
+A = \mathrm{softmax}(S)
 $$
 
 $$
@@ -116,11 +116,11 @@ That tests real causal behavior rather than merely checking that a triangular ma
 SoulFlame implements LayerNorm directly instead of using `nn.LayerNorm`.
 
 $$
-\mu = \operatorname{mean}(x)
+\mu = \mathrm{mean}(x)
 $$
 
 $$
-\sigma^2 = \operatorname{var}(x)
+\sigma^2 = \mathrm{var}(x)
 $$
 
 $$
@@ -148,7 +148,7 @@ Implementation details:
 SoulFlame implements the GPT-style tanh approximation:
 
 $$
-\operatorname{GELU}(x) = 0.5x \left(1 + \tanh \left[\sqrt{\frac{2}{\pi}} \left(x + 0.044715x^3\right)\right]\right)
+\mathrm{GELU}(x) = 0.5x \left(1 + \tanh \left[\sqrt{\frac{2}{\pi}} \left(x + 0.044715x^3\right)\right]\right)
 $$
 
 GELU has no trainable parameters.
@@ -162,7 +162,7 @@ GELU has no trainable parameters.
 Each token is processed independently using:
 
 $$
-d \rightarrow 4d \rightarrow \operatorname{GELU} \rightarrow d
+d \rightarrow 4d \rightarrow \mathrm{GELU} \rightarrow d
 $$
 
 For a GPT-2-small-style configuration:
